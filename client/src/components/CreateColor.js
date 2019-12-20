@@ -5,7 +5,9 @@ import {axiosWithAuth} from '../utils/axiosWithAuth';
 const CreateColor = (props) => {
     const [newColor, setIsNewColor] = useState({
         color: '',
-        hex: ''
+        code: {
+            hex: ''
+        }
     })
 
     //handleInputChanges
@@ -23,10 +25,11 @@ const CreateColor = (props) => {
 
         //axiosWithAuth
         axiosWithAuth()
-            .post('/api/color', newColor)
+            .post('/colors', newColor)
             .then(response => {
-                console.log(response)
+                console.log('CREATE NEW COLOR RESPONSE', response)
 
+                
                 //set values to empty
                 setIsNewColor({
                     color: '',
@@ -40,10 +43,11 @@ const CreateColor = (props) => {
             })
     } 
 
+
     return(
         <div>
             <h3>Add a new color</h3>
-            <form >
+            <form onSubmit={handleNewColorSubmit} >
                 <input 
                     type='text'
                     name='color'
@@ -52,7 +56,7 @@ const CreateColor = (props) => {
                     onChange={handleInputChanges}
                 />
                 <input 
-                    type='number'
+                    type='text'
                     name='hex'
                     placeholder='Hex'
                     value={newColor.hex}

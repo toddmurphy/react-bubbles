@@ -53,7 +53,6 @@ const ColorList = ({ colors, updateColors, id, isFetching, setIsFetching }) => {
   return (
     <div className="colors-wrap">
       <p>colors</p>
-      <CreateColor isFetching={isFetching} setIsFetching={setIsFetching} />
       <ul>
         {colors.map(color => (
           <li key={color.color} onClick={() => editColor(color)}>
@@ -104,10 +103,12 @@ const ColorList = ({ colors, updateColors, id, isFetching, setIsFetching }) => {
           </div>
         </form>
       )}
+       <CreateColor setColorToEdit={setColorToEdit} isFetching={isFetching} setIsFetching={setIsFetching} />
       <div className="spacer" />
       {/* stretch - build another form here to add a color */}
+     
       <div>
-      <CreateColor isFetching={isFetching} setIsFetching={setIsFetching} />
+      {/* <CreateColor isFetching={isFetching} setIsFetching={setIsFetching} />
         <form>
           <input 
             type='text'
@@ -119,7 +120,7 @@ const ColorList = ({ colors, updateColors, id, isFetching, setIsFetching }) => {
             name='color'
             placeholder='Color'
           />
-        </form>
+        </form> */}
       </div>
       
     </div>
