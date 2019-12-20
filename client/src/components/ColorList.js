@@ -16,11 +16,21 @@ const ColorList = ({ colors, updateColors, id, isFetching, setIsFetching }) => {
     setColorToEdit(color);
   };
 
+  
+
   const saveEdit = e => {
     e.preventDefault();
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
+    console.log("IN SAVE EDIT", colorToEdit);
+    setEditing(true);
+    axiosWithAuth()
+      .put(`/colors/${colorToEdit.id}`, {...colorToEdit})
+      .then(res => {
+        console.log("EDIT", res);
+        setIsFetching(!isFetching)
+      });
   };
 
   const deleteColor = (color) => {
@@ -32,7 +42,7 @@ const ColorList = ({ colors, updateColors, id, isFetching, setIsFetching }) => {
         console.log(response)
 
         setIsFetching(!isFetching)
-        // props.history.push('/BubblePage')
+       
       })
       .catch(error => {
         console.log('Sorry, color not deleted!', error)
