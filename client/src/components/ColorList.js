@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {axiosWithAuth} from '../utils/axiosWithAuth';
+import CreateColor from "./CreateColor";
 
 const initialColor = {
   color: "",
@@ -52,6 +53,7 @@ const ColorList = ({ colors, updateColors, id, isFetching, setIsFetching }) => {
   return (
     <div className="colors-wrap">
       <p>colors</p>
+      <CreateColor isFetching={isFetching} setIsFetching={setIsFetching} />
       <ul>
         {colors.map(color => (
           <li key={color.color} onClick={() => editColor(color)}>
@@ -104,6 +106,22 @@ const ColorList = ({ colors, updateColors, id, isFetching, setIsFetching }) => {
       )}
       <div className="spacer" />
       {/* stretch - build another form here to add a color */}
+      <div>
+      <CreateColor isFetching={isFetching} setIsFetching={setIsFetching} />
+        <form>
+          <input 
+            type='text'
+            name='color'
+            placeholder='Color'
+          />
+          <input 
+            type='text'
+            name='color'
+            placeholder='Color'
+          />
+        </form>
+      </div>
+      
     </div>
   );
 };
