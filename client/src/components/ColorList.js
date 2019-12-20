@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import axios from "axios";
+import {axiosWithAuth} from '../utils/axiosWithAuth';
 
 const initialColor = {
   color: "",
   code: { hex: "" }
 };
 
-const ColorList = ({ colors, updateColors }) => {
+const ColorList = ({ colors, updateColors, id, isFetching, setIsFetching }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
@@ -23,8 +23,20 @@ const ColorList = ({ colors, updateColors }) => {
     // where is is saved right now?
   };
 
-  const deleteColor = color => {
+  const deleteColor = (color) => {
     // make a delete request to delete this color
+    
+    axiosWithAuth()
+      .delete(`colors/${color.id}`)
+      .then(response => {
+        console.log(response)
+
+        setIsFetching(!isFetching)
+        // props.history.push('/BubblePage')
+      })
+      .catch(error => {
+        console.log('Sorry, color not deleted!', error)
+      })
   };
 
   return (
