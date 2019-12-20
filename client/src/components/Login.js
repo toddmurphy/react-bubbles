@@ -30,7 +30,7 @@ const Login = (props) => {
     axiosWithAuth()
       .post('/login', credentials)
       .then(response => {
-          return console.log(response)
+          console.log(response)
           localStorage.setItem('token', response.data.payload)
 
           //reset values back to empty strings
