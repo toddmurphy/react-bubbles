@@ -26,7 +26,7 @@ const ColorList = ({ colors, updateColors, id, isFetching, setIsFetching }) => {
     console.log("IN SAVE EDIT", colorToEdit);
     setEditing(true);
     axiosWithAuth()
-      .put(`/colors/${colorToEdit.id}`, {...colorToEdit})
+      .put(`/colors/${colorToEdit.id}`, colorToEdit)
       .then(res => {
         console.log("EDIT", res);
         setIsFetching(!isFetching)
